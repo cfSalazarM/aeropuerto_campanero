@@ -14,6 +14,7 @@ export default class ListAerolinea {
        }
        else {
         this._listAerolinea = JSON.parse(storageList);
+        console.log(this._listAerolinea);
        }
        return this._listAerolinea;
     }
