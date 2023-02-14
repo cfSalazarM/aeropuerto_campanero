@@ -4,6 +4,7 @@ import Aerolinea from "../classes/Aerolinea";
 import ListAerolinea from "../classes/listAerolineas";
 
 let content = document.getElementById('root');
+var clickAEdit;
 
 const router = (route) => {
     switch (route) {
@@ -87,6 +88,15 @@ const router = (route) => {
 
                     tbody.appendChild(fila);
 
+                    const aEditAero = document.getElementById('aEditAero');
+                    console.log(aEditAero);
+                    
+
+                    aEditAero.addEventListener('click', (evt)=> {
+                        clickAEdit = document.activeElement.parentElement.parentElement.firstChild;
+                        console.log(clickAEdit.textContent);
+                    });
+
                     let aerolinea = new Aerolinea(inputNit, inputNombre, inputTelefono);
                     console.log(aerolinea);
                     console.log(listAerolinea.getListAerolinea());
@@ -100,26 +110,18 @@ const router = (route) => {
                 }
             });
 
-
-
-            const aEditAero = document.getElementById('aEditAero');
-            let clickAEdit
-
-            try {
-                aEditAero.addEventListener('click', () => {
-                    clickAEdit = document.activeElement.parentElement.parentElement;
-                });
-            } catch (error) {
-                console.log("vacio")
-            }
+            
+            
+           
 
 
             const butEditAero = document.getElementById('bEditAerolinea');
             butEditAero.addEventListener('click', () => {
 
                 const inputNombreEdit = document.getElementById('inputNombreEdit').value;
+                console.log(inputNombreEdit);
                 console.log(listAerolinea);
-                listAerolinea.editAerolinea(clickAEdit[0], inputNombreEdit);
+                listAerolinea.editAerolinea(clickAEdit, inputNombreEdit);
                 console.log(listAerolinea);
 
             });

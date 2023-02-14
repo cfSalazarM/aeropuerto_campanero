@@ -28,13 +28,18 @@ export default class ListAerolinea {
 
         }
 
-        return i;
+        return i-1;
     }
 
     editAerolinea(nit, nombreAerolinea) {
+        let a;
         let indice =this.getAerolineaByNit(nit);
+        console.log( this._listAerolinea.at(indice).nombreAerolinaerolinea);
         this._listAerolinea.at(indice).nombreAerolinea = nombreAerolinea;
+        console.log( this._listAerolinea.at(indice).nombreAerolinea);
         this.localStorageAeroList(this._listAerolinea);
+       // a = localStorage.getItem('localAeroList').at(indice);
+        //console.log(a);
     }
 
     localStorageAeroList(listAerolinea) {
