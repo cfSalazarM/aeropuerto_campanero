@@ -1,4 +1,7 @@
 'use strict';
+
+import { forEach } from "lodash";
+
 export default class ListAerolinea {
     _listAerolinea = [];
 
@@ -20,26 +23,30 @@ export default class ListAerolinea {
     }
 
     getAerolineaByNit(nit) {
-        let i = 0;
-        for(i; i<this._listAerolinea.length; i++) {
-            if(this._listAerolinea[i].nit == nit) {
-                break;
+        for (let index = 0; index < this._listAerolinea.length; index++) {
+            if (this._listAerolinea[index].nit === nit) {
+                return index;
             }
-
+            
         }
-
-        return i-1;
     }
 
-    editAerolinea(nit, nombreAerolinea) {
-        let a;
-        let indice =this.getAerolineaByNit(nit);
-        console.log( this._listAerolinea.at(indice).nombreAerolinaerolinea);
+    editAerolinea(oldNit, nombreAerolinea, telefonoAerolinea) {
+        let indice = this.getAerolineaByNit(oldNit);
+        console.log(indice);
         this._listAerolinea.at(indice).nombreAerolinea = nombreAerolinea;
-        console.log( this._listAerolinea.at(indice).nombreAerolinea);
+        this._listAerolinea.at(indice).telefonoAerolinea = telefonoAerolinea;
         this.localStorageAeroList(this._listAerolinea);
-       // a = localStorage.getItem('localAeroList').at(indice);
-        //console.log(a);
+       
+    }
+
+    deleteAerolinea(nit) {
+        this._listAerolinea = this._listAerolinea.filter(aerolinea => aerolinea.nit != nit);
+        this.localStorageAeroList(this._listAerolinea);
+    }
+
+    deleteAllAerolineas() {
+        localStorage.removeItem('localAeroList');
     }
 
     localStorageAeroList(listAerolinea) {
