@@ -2,7 +2,9 @@ import { pages } from "../controllers/index";
 import Swal from 'sweetalert2'
 import Aerolinea from "../classes/Aerolinea";
 import ListAerolinea from "../classes/listAerolineas";
-
+import { User } from "../classes/user";
+import ListUsers from "../classes/listUsers";
+import { msj } from "../../utilities/messages";
 
 let content = document.getElementById('root');
 
@@ -20,33 +22,67 @@ const router = (route) => {
             content.innerHTML = '';
             content.appendChild(pages.login());
 
+            msj.showMsj();
+
             const button = document.getElementById('bLog');
             button.addEventListener('click', () => {
-                const textUser = document.getElementById("floatingInput").value;
-                console.log(textUser);
-                const textPassword = document.getElementById('floatingPassword').value;
+                const user = document.getElementById("floatingInput").value;
+                const password = document.getElementById('floatingPassword').value;
 
-                if (textUser == 'felipe@hotmail.com' && textPassword == '12345') {
-                    Swal.fire(
-                        'Aviso',
-                        'Ingreso exitoso',
-                        'success'
-                    )
-                    window.location.hash = "#/admin";
-                }
+                let listUsers = new ListUsers();
+                listUsers._listUsers = listUsers.getListUsers();
+                
+                let flag = listUsers.authUser(user, password);
+                msj.Login0k(flag, "#/admin-Airline");
+                    
             });
             return console.log('login');
         };
         case '#/registro':
-            return console.log('registro');
-        case '#/admin': {
             content.innerHTML = '';
-            content.appendChild(pages.admin());
+            content.appendChild(pages.register());
 
-            let listAerolinea = new ListAerolinea();
-            listAerolinea._listAerolinea = listAerolinea.getListAerolinea();
-            let list = listAerolinea._listAerolinea;
-            console.log(list.at(0));
+            let listUsers = new ListUsers();
+            listUsers._listUsers = listUsers.getListUsers();
+
+            msj.issetAdmin(listUsers.issetAdmin());
+
+            if (sessionStorage.getItem("msj")) {
+                Swal.fire(
+                    `${sessionStorage.getItem("hmsj")}`,
+                    `${sessionStorage.getItem("msj")}`,
+                    `${sessionStorage.getItem("typeMsj")}`
+                );
+
+                sessionStorage.removeItem("hmsj");
+                sessionStorage.removeItem("msj");
+                sessionStorage.removeItem("typeMsj");
+            }
+            
+            const formRegister = document.getElementById('form-addUser');
+
+            formRegister.addEventListener('submit', evt=>{
+                evt.preventDefault();
+                let userName = document.getElementById('user').value;
+                console.log(userName);
+                let name = document.getElementById('name').value;
+                let phone = document.getElementById('phone').value;
+                let password = document.getElementById('password').value;
+                let typeUser = listUsers.issetAdmin() == true ? "client" : "admin";
+                let user = new User(userName, name, phone, typeUser, password); 
+                listUsers.addUser(user);
+                msj.RegisterOk();
+            })
+
+
+            return console.log('registro');
+        case '#/admin-Airline': {
+            content.innerHTML = '';
+            content.appendChild(pages.AdminAirline());
+
+            let listUsers = new ListUsers();
+            listUsers._listUsers = listUsers.getListUsers();
+            let list = listUsers.getListByType('airline');
 
             for (let index = 0; index < list.length; index++) {
                 let tbody = document.getElementById('tbody');
@@ -57,21 +93,26 @@ const router = (route) => {
                 let celdaNombre = document.createElement('td');
                 let celdaTelefono = document.createElement('td');
                 let celdaEditDelete = document.createElement('td');
+                let celdaPassword = document.createElement('td');
 
-                let nodoTextNit = document.createTextNode(list[index].nit);
-                let nodoTextNombre = document.createTextNode(list[index].nombreAerolinea);
-                let nodoTextTelefono = document.createTextNode(list[index].telefonoAerolinea);
+
+                let nodoTextNit = document.createTextNode(list[index].user);
+                let nodoTextNombre = document.createTextNode(list[index].nameUser);
+                let nodoTextTelefono = document.createTextNode(list[index].phone);
+                let nodoPassword = document.createTextNode(list[index].password);
 
                 celdaNit.appendChild(nodoTextNit);
                 celdaNombre.appendChild(nodoTextNombre);
                 celdaTelefono.appendChild(nodoTextTelefono)
+                celdaPassword.appendChild(nodoPassword);
 
                 fila.appendChild(celdaNit);
                 fila.appendChild(celdaNombre);
                 fila.appendChild(celdaTelefono);
+                fila.appendChild(celdaPassword);
 
-                celdaEditDelete.innerHTML = '<a href="#editAerolineaModal" class="edit" data-bs-toggle="modal" data-bs-nit="' + list[index].nit + '" id="aEditAero"><i class="fa-solid fa-pencil" data-toggle="tooltip" title="Editar" style="font-size: 22px; margin: 0 5px;"></i></a>' +
-                    '<a href="#deleteAerolineaModal" class="delete" data-bs-toggle="modal" data-bs-nit="' + list[index].nit + '"><i class="fa-solid fa-trash-can" data-toggle="tooltip" title="Eliminar" style="font-size: 22px; margin: 0 5px;"></i></a>';
+                celdaEditDelete.innerHTML = '<a href="#editAerolineaModal" class="edit" data-bs-toggle="modal" data-bs-nit="' + list[index].user + '" id="aEditAero"><i class="fa-solid fa-pencil" data-toggle="tooltip" title="Editar" style="font-size: 22px; margin: 0 5px;"></i></a>' +
+                    '<a href="#deleteAerolineaModal" class="delete" data-bs-toggle="modal" data-bs-nit="' + list[index].user + '"><i class="fa-solid fa-trash-can" data-toggle="tooltip" title="Eliminar" style="font-size: 22px; margin: 0 5px;"></i></a>';
                 fila.appendChild(celdaEditDelete);
 
                 tbody.appendChild(fila);
@@ -95,9 +136,10 @@ const router = (route) => {
                 let forms = document.querySelectorAll('.needs-validation');
                 validate();
 
-                const inputNit = document.getElementById('inputNit').value;
-                const inputNombre = document.getElementById('inputNombre').value;
-                const inputTelefono = document.getElementById('inputTelefono').value;
+                const nit = document.getElementById('inputNit').value;
+                const nombre = document.getElementById('inputNombre').value;
+                const telefono = document.getElementById('inputTelefono').value;
+                const password = document.getElementById('inputPassword').value;
 
                 forms.forEach(form => {
                     ban = form.checkValidity();
@@ -105,8 +147,8 @@ const router = (route) => {
 
                 if (ban == true) {
 
-                    let aerolinea = new Aerolinea(inputNit, inputNombre, inputTelefono);
-                    listAerolinea.addAerolinea(aerolinea);
+                    let aerolinea = new User(nit, nombre, telefono, "airline", password);
+                    listUsers.addUser(aerolinea);
                     sessionStorage.setItem("hmsj", "Aviso");
                     sessionStorage.setItem("msj", "Registro exitoso");
                     sessionStorage.setItem("typeMsj", "success");
@@ -130,7 +172,7 @@ const router = (route) => {
             let formEdit = document.getElementById('form-EditAero');
             formEdit.addEventListener('submit', evt => {
                 evt.preventDefault();
-                listAerolinea.editAerolinea(document.getElementById('oldNit').value, document.getElementById('inputNombreEdit').value, document.getElementById('inputTelefonoEdit').value);
+                listUsers.editAerolinea(document.getElementById('oldNit').value, document.getElementById('inputNombreEdit').value, document.getElementById('inputTelefonoEdit').value);
                 sessionStorage.setItem("hmsj", "Aviso");
                 sessionStorage.setItem("msj", "El registro se actualizó correctamente");
                 sessionStorage.setItem("typeMsj", "success");
@@ -139,9 +181,9 @@ const router = (route) => {
 
             let formDelete = document.getElementById('form-DeleteAero');
 
-            formDelete.addEventListener('submit', evt =>{ 
+            formDelete.addEventListener('submit', evt => {
                 evt.preventDefault();
-                listAerolinea.deleteAerolinea(document.getElementById('nitDelete').value);
+                listUsers.deleteAerolinea(document.getElementById('nitDelete').value);
                 sessionStorage.setItem("hmsj", "Aviso");
                 sessionStorage.setItem("msj", "El registro se eliminó correctamente");
                 sessionStorage.setItem("typeMsj", "success");
@@ -152,7 +194,7 @@ const router = (route) => {
 
             formAllDelete.addEventListener('submit', evt => {
                 evt.preventDefault();
-                listAerolinea.deleteAllAerolineas();
+                listUsers.deleteAllAerolineas();
                 sessionStorage.setItem("hmsj", "Aviso");
                 sessionStorage.setItem("msj", "Todos los registros se han eliminado correctamente");
                 sessionStorage.setItem("typeMsj", "success");
@@ -197,7 +239,7 @@ function validate() {
         })
 }
 
-function getNit(event){
+function getNit(event) {
     let selection = event.relatedTarget;
     let nit = selection.getAttribute('data-bs-nit');
 

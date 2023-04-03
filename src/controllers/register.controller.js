@@ -1,4 +1,4 @@
-import views from "../views/admin-airline.html";
+import views from "../views/register.html";
 
 export default () => {
     

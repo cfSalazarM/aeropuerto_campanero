@@ -6,8 +6,8 @@
         </div>
         
         <ul class="list-unstyled px-2">
-            <li class="active"><a href="#/admin" class="text-decoration-none px-3 py-2 text-white d-block"><i class="fa-solid fa-paper-plane px-2"></i>Aerolíneas</a></li>
-            <li class=""><a href="#/admin" class="text-decoration-none px-3 py-2 text-white d-block"><i class="fa-solid fa-house px-2"></i>Hangares</a></li>
+            <li class="active"><a href="#/admin-Airline" class="text-decoration-none px-3 py-2 text-white d-block"><i class="fa-solid fa-paper-plane px-2"></i>Aerolíneas</a></li>
+            <li class=""><a href="#/admin-hangar" class="text-decoration-none px-3 py-2 text-white d-block"><i class="fa-solid fa-house px-2"></i>Hangares</a></li>
         </ul>
         <a class="btn btn-secondary mx-4 my-3 rounded-3" href="#/login">Cerrar sesión</a>
 
@@ -45,6 +45,7 @@
                                 <th>Nit</th>
                                 <th>Nombre</th>
                                 <th>Telefono</th>
+								<th>Contraseña</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -85,7 +86,11 @@
 					<div class="form-group">
 						<label>Telefono</label>
 						<input type="text" class="form-control" id="inputTelefono" required>
-					</div>					
+					</div>
+					<div class="form-group">
+						<label>Contraseña</label>
+						<input type="password" class="form-control" id="inputPassword" required>
+					</div>								
 				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancelar">
