@@ -15,28 +15,24 @@ export default class ListUsers {
        }
        else {
         this._listUsers = JSON.parse(storageList);
-        console.log(this._listUsers);
        }
        return this._listUsers;
     }
 
     getListByType(typeUser) {
-        let list = this._listUsers.filter(user => user.typeUser === typeUser)
+        let list = this._listUsers.filter(user => user.typeUser === typeUser);
 
         return list
     }
 
-    getUser(typeUser, user) {
-        for (let index = 0; index < this._listUsers.length; index++) {
-            if (this._listUsers[index].nit === nit) {
-                return index;
-            }
-            
-        }
+    getUser(user) {
+        let result = this._listUsers.findIndex((item) => item.user === user);
+
+        return result
     }
 
     authUser(user, password) {
-        let list = this._listUsers.filter(item => item.user === user && item.password === password )
+        let list = this._listUsers.filter(item => item.user === user && item.password === password );
 
         return list.length > 0 && list.length < 2
     }
@@ -48,22 +44,24 @@ export default class ListUsers {
         return ban
     }
 
-    editUser(oldUser, nameUser, phoneUser) {
+    editUser(oldUser, nameUser, phone, password) {
         let indice = this.getUser(oldUser);
-        console.log(indice);
-        this._listUsers.at(indice).nombreAerolinea = nameUser;
-        this._listUsers.at(indice).telefonoAerolinea = phoneUser;
-        this.localStorageAeroList(this._listUsers);
+
+        this._listUsers.at(indice).nameUser = nameUser;
+        this._listUsers.at(indice).phone = phone;
+        this._listUsers.at(indice).password = password;
+        this.localStorageUList(this._listUsers);
        
     }
 
-    deleteUser(typeUser, user) {
+    deleteUser(user) {
         this._listUsers = this._listUsers.filter(item => item.user != user);
-        this.localStorageAeroList(this._listUsers);
+        this.localStorageUList(this._listUsers);
     }
 
-    deleteAllUsers() {
-        localStorage.removeItem('localUList');
+    deleteAllUsers(typeUser) {
+        this._listUsers = this._listUsers.filter(item => item.typeUser != typeUser);
+        this.localStorageUList(this._listUsers);
     }
 
     localStorageUList(listAerolinea) {

@@ -29,7 +29,7 @@ const msj = {
             sessionStorage.setItem("typeMsj", "success");
             window.location.hash = hash;
         }
-        
+
     },
 
     issetAdmin(flag) {
@@ -37,6 +37,7 @@ const msj = {
             sessionStorage.setItem("hmsj", "Aviso");
             sessionStorage.setItem("msj", "Aun no hay un admin registrado, por la tanto el usuario a registrar será el admin");
             sessionStorage.setItem("typeMsj", "warning");
+            window.location.reload();
         }
     },
 
@@ -45,6 +46,27 @@ const msj = {
         sessionStorage.setItem("msj", "Registro exitoso");
         sessionStorage.setItem("typeMsj", "success");
 
+        window.location.reload();
+    },
+
+    UpdateOk() {
+        sessionStorage.setItem("hmsj", "Aviso");
+        sessionStorage.setItem("msj", "El registro se actualizó correctamente");
+        sessionStorage.setItem("typeMsj", "success");
+        window.location.reload();
+    },
+
+    DeleteOk() {
+        sessionStorage.setItem("hmsj", "Aviso");
+        sessionStorage.setItem("msj", "El registro se eliminó correctamente");
+        sessionStorage.setItem("typeMsj", "success");
+        window.location.reload();
+    },
+
+    DeleteAllOk() {
+        sessionStorage.setItem("hmsj", "Aviso");
+        sessionStorage.setItem("msj", "Todos los registros se han eliminado correctamente");
+        sessionStorage.setItem("typeMsj", "success");
         window.location.reload();
     }
 }
