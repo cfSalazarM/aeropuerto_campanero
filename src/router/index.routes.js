@@ -1,6 +1,4 @@
 import { pages } from "../controllers/index";
-import ListUsers from "../classes/listUsers";
-import { msj } from "../../utilities/messages";
 
 let content = document.getElementById('root');
 

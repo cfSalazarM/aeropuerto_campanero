@@ -1,16 +1,15 @@
 import ListUsers from "../src/classes/listUsers"
 
 const validations = {
-    issetAdmin(user) {
-        let listUsers = new ListUsers();
-        listUsers= listUsers.getListUsers();
-        let users = listUsers._listUsers;
-
-        let result = users.filter(user => user.typeUser === "admin");
-
-        let ban = result ? true : false;
-
-        return ban
+    fieldEmpty(fields) {
+        for (let i = 0; i < fields.length; i++) {
+            if (fields[i] === "") {
+                return false;
+            }
+            else if (fields[fields.length - 1]) {
+                return true;
+            }     
+        }
     }
 } 
 

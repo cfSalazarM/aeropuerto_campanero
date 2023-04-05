@@ -2,7 +2,7 @@ import views from "../views/admin-airline.html";
 import { User } from "../classes/user";
 import ListUsers from "../classes/listUsers";
 import { msj } from "../../utilities/messages";
-
+import { validations } from "../../utilities/validation";
 
 const AdminAirline = {
     loadView() {
@@ -55,21 +55,17 @@ const AdminAirline = {
 
         const butAddAero = document.getElementById('bAddAerolinea');
         butAddAero.addEventListener('click', () => {
-            let ban
-            let forms = document.querySelectorAll('.needs-validation');
-            validate();
 
             const nit = document.getElementById('inputNit').value;
             const nombre = document.getElementById('inputNombre').value;
             const telefono = document.getElementById('inputTelefono').value;
             const password = document.getElementById('inputPassword').value;
-
-            forms.forEach(form => {
-                ban = form.checkValidity();
-            })
-
-            if (ban == true) {
-
+            let fields = [nit, nombre, telefono, password];
+            let pass = validations.fieldEmpty(fields);
+            if (!pass) {
+                msj.fieldsOk(pass);
+            }
+            else {
                 let aerolinea = new User(nit, nombre, telefono, "airline", password);
                 listUsers.addUser(aerolinea);
                 msj.RegisterOk();
@@ -98,9 +94,18 @@ const AdminAirline = {
             let phone = document.getElementById('inputTelefonoEdit').value
             let password = document.getElementById('inputPasswordEdit').value;
 
-            listUsers.editUser(nit, name, phone, password);
+            let fields = [nit, name, phone, password];
 
-            msj.UpdateOk();
+            let pass = validations.fieldEmpty(fields);
+            if (!pass) {
+                msj.fieldsOk(pass);
+            }
+            else {
+                listUsers.editUser(nit, name, phone, password);
+
+                msj.UpdateOk();
+            }
+
         });
 
         let formDelete = document.getElementById('form-DeleteAero');
@@ -120,28 +125,6 @@ const AdminAirline = {
 
             msj.DeleteAllOk();
         })
-
-        function validate() {
-            // Example starter JavaScript for disabling form submissions if there are invalid fields
-            var ban = true
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('.needs-validation')
-
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    },
-                        false)
-
-                })
-        }
 
         function getNit(event) {
             let selection = event.relatedTarget;

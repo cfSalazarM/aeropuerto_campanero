@@ -2,13 +2,13 @@ import views from "../views/login.html";
 import { User } from "../classes/user";
 import ListUsers from "../classes/listUsers";
 import { msj } from "../../utilities/messages";
-
+import { validations } from "../../utilities/validation";
 
 const Login = {
-    loadView () {
+    loadView() {
         const divElement = document.createElement('div');
         divElement.innerHTML = views;
-    
+
         return divElement;
     },
 
@@ -19,13 +19,24 @@ const Login = {
         button.addEventListener('click', () => {
             const user = document.getElementById("floatingInput").value;
             const password = document.getElementById('floatingPassword').value;
+            let fields = [user, password];
 
-            let listUsers = new ListUsers();
-            listUsers._listUsers = listUsers.getListUsers();
-            
-            let flag = listUsers.authUser(user, password);
-            msj.Login0k(flag, "#/admin-Airline");
-                
+            let pass = validations.fieldEmpty(fields);
+            if (!pass) {
+                msj.fieldsOk(pass);
+            }
+
+            else {
+                let listUsers = new ListUsers();
+                listUsers._listUsers = listUsers.getListUsers();
+
+                let flag = listUsers.authUser(user, password);
+                msj.Login0k(flag, "#/admin-Airline");
+            }
+
+
+
+
         });
     }
 }

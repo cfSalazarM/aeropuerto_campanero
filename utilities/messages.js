@@ -16,6 +16,15 @@ const msj = {
         }
     },
 
+    fieldsOk(flag) {
+        if (!flag) {
+            sessionStorage.setItem("hmsj", "Error");
+            sessionStorage.setItem("msj", "Por favor llene todos los campos");
+            sessionStorage.setItem("typeMsj", "error");
+            window.location.reload();
+        }
+    },
+
     Login0k(flag, hash) {
         if (flag === false) {
             sessionStorage.setItem("hmsj", "Error");
