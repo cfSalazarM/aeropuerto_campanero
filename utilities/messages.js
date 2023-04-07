@@ -1,6 +1,20 @@
 import Swal from 'sweetalert2';
 
 const msj = {
+    showWarningAdmin() {
+        if (sessionStorage.getItem("msjA")) {
+            Swal.fire(
+                `${sessionStorage.getItem("hmsjA")}`,
+                `${sessionStorage.getItem("msjA")}`,
+                `${sessionStorage.getItem("typeMsjA")}`
+            );
+
+            sessionStorage.removeItem("hmsjA");
+            sessionStorage.removeItem("msjA");
+            sessionStorage.removeItem("typeMsjA");
+        }
+    },
+
 
     showMsj() {
         if (sessionStorage.getItem("msj")) {
@@ -43,10 +57,9 @@ const msj = {
 
     issetAdmin(flag) {
         if (!flag) {
-            sessionStorage.setItem("hmsj", "Aviso");
-            sessionStorage.setItem("msj", "Aun no hay un admin registrado, por la tanto el usuario a registrar será el admin");
-            sessionStorage.setItem("typeMsj", "warning");
-            window.location.reload();
+            sessionStorage.setItem("hmsjA", "Aviso");
+            sessionStorage.setItem("msjA", "Aun no hay un admin registrado, por la tanto el usuario a registrar será el admin");
+            sessionStorage.setItem("typeMsjA", "warning");
         }
     },
 

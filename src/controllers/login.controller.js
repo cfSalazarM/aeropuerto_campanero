@@ -31,7 +31,7 @@ const Login = {
                 listUsers._listUsers = listUsers.getListUsers();
 
                 let flag = listUsers.authUser(user, password);
-                msj.Login0k(flag, "#/admin-Airline");
+                msj.Login0k(flag, "#/admin-airline");
             }
 
 

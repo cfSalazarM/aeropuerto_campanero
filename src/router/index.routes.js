@@ -3,6 +3,7 @@ import { pages } from "../controllers/index";
 let content = document.getElementById('root');
 
 const router = (route) => {
+    content.innerHTML = '';
     switch (route) {
         case '#/':
             return console.log('home');
@@ -12,30 +13,31 @@ const router = (route) => {
             return console.log('aerolineas');
         case '#/sobreNosotros':
             return console.log('sobreNosotros');
-        case '#/login': {
-            content.innerHTML = '';
+        case '#/login': {  
             content.appendChild(pages.login.loadView());
-
             pages.login.manageDom();
            
             return console.log('login');
         };
         case '#/registro':
-            content.innerHTML = '';
             content.appendChild(pages.register.loadView());
-
             pages.register.manageDom();
             
             return console.log('registro');
            
-        case '#/admin-Airline': {
-            content.innerHTML = '';
+        case '#/admin-airline': {
             content.appendChild(pages.adminAirline.loadView());
-    
-           pages.adminAirline.manageDom();
+            pages.adminAirline.manageDom();
 
-            return console.log('admin');
+            return console.log('admin-Aerolineas');
         };
+
+        case '#/admin-hangar': {
+            content.append(pages.adminHangar.loadView());
+            pages.adminHangar.manageDom();
+
+            return console.log('admin-Hangares');
+        }
 
         default: {
             if (window.location.href == 'http://localhost:8080/') {
