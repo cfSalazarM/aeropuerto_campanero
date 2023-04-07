@@ -56,8 +56,12 @@ const AdminHangar = {
             const location = document.getElementById('inputLocation').value;
             let fields = [code, capacity, location];
             let pass = validations.fieldEmpty(fields);
+            let passNumber = validations.isNumber(fields, ['codigo', 'capacidad', 'ubicación']);
             if (!pass) {
                 msj.fieldsOk(pass);
+            }
+            else if(!passNumber.flag) {
+                msj.numberOk(passNumber);
             }
             else {
                 let hangar = new Hangar(code, capacity, location);

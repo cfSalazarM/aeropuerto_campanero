@@ -51,6 +51,4 @@ const router = (route) => {
 
 }
 
-
-
 export { router };

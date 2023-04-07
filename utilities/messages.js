@@ -15,7 +15,6 @@ const msj = {
         }
     },
 
-
     showMsj() {
         if (sessionStorage.getItem("msj")) {
             Swal.fire(
@@ -34,6 +33,15 @@ const msj = {
         if (!flag) {
             sessionStorage.setItem("hmsj", "Error");
             sessionStorage.setItem("msj", "Por favor llene todos los campos");
+            sessionStorage.setItem("typeMsj", "error");
+            window.location.reload();
+        }
+    },
+
+    numberOk(resultValidation) {
+        if (!resultValidation.flag) {
+            sessionStorage.setItem("hmsj", "Error");
+            sessionStorage.setItem("msj", `${resultValidation.nameField} no valido/a - Debe contener solo numeros`);
             sessionStorage.setItem("typeMsj", "error");
             window.location.reload();
         }

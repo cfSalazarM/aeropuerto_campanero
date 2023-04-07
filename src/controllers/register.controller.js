@@ -6,7 +6,6 @@ import { validations } from "../../utilities/validation";
 
 const Register = {
     loadView() {
-
         const divElement = document.createElement('div');
         divElement.innerHTML = views;
 
