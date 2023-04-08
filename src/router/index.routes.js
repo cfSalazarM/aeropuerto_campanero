@@ -13,22 +13,31 @@ const router = (route) => {
             return console.log('aerolineas');
         case '#/sobreNosotros':
             return console.log('sobreNosotros');
-        case '#/login': {  
+        case '#/login': {
             content.appendChild(pages.login.loadView());
             pages.login.manageDom();
-           
+
             return console.log('login');
         };
         case '#/registro':
             content.appendChild(pages.register.loadView());
             pages.register.manageDom();
-            
-            return console.log('registro');
-           
-        case '#/admin-airline': {
-            content.appendChild(pages.adminAirline.loadView());
-            pages.adminAirline.manageDom();
 
+            return console.log('registro');
+
+        case '#/admin-airline': {
+            let string = sessionStorage.getItem('session');
+            let session = JSON.parse(string);
+
+            if (session.typeUser === "admin") { 
+                content.appendChild(pages.adminAirline.loadView());
+                pages.adminAirline.manageDom();
+            }
+            else {
+                window.location.hash = '#/login';
+                sessionStorage.removeItem('session')
+            }
+            
             return console.log('admin-Aerolineas');
         };
 
@@ -37,6 +46,10 @@ const router = (route) => {
             pages.adminHangar.manageDom();
 
             return console.log('admin-Hangares');
+        }
+
+        case '#/airline': {
+
         }
 
         default: {

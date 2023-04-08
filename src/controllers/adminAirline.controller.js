@@ -1,8 +1,8 @@
 import views from "../views/admin-airline.html";
 import { User } from "../classes/user";
 import ListUsers from "../classes/listUsers";
-import { msj } from "../../utilities/messages";
-import { validations } from "../../utilities/validation";
+import { msj } from "../utilities/messages";
+import { validations } from "../utilities/validation";
 
 const AdminAirline = {
     loadView() {
@@ -14,6 +14,7 @@ const AdminAirline = {
     },
 
     manageDom() {
+        console.log(sessionStorage.getItem('session'));
         let listUsers = new ListUsers();
         listUsers._listUsers = listUsers.getListUsers();
         let list = listUsers.getListByType('airline');
@@ -62,8 +63,12 @@ const AdminAirline = {
             const password = document.getElementById('inputPassword').value;
             let fields = [nit, nombre, telefono, password];
             let pass = validations.fieldEmpty(fields);
+            let passNumber = validations.isNumber([nit, telefono], ['Nit', 'Telefono']);
             if (!pass) {
                 msj.fieldsOk(pass);
+            }
+            else if (!passNumber.flag) {
+                msj.numberOk(passNumber);
             }
             else {
                 let aerolinea = new User(nit, nombre, telefono, "airline", password);

@@ -1,8 +1,8 @@
 import views from "../views/register.html";
 import { User } from "../classes/user";
 import ListUsers from "../classes/listUsers";
-import { msj } from "../../utilities/messages";
-import { validations } from "../../utilities/validation";
+import { msj } from "../utilities/messages";
+import { validations } from "../utilities/validation";
 
 const Register = {
     loadView() {
@@ -32,10 +32,14 @@ const Register = {
             let typeUser = listUsers.issetAdmin() == true ? "client" : "admin";
 
             let fields = [userName, name, phone, password, typeUser];
+            let passNumber = validations.isNumber([phone], ['Telefono']);
 
             let pass = validations.fieldEmpty(fields);
             if (!pass) {
                 msj.fieldsOk(pass);
+            }
+            else if(!passNumber.flag) {
+                msj.numberOk(passNumber);
             }
             else {
                 let user = new User(userName, name, phone, typeUser, password);

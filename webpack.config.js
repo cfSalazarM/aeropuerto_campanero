@@ -1,4 +1,5 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
     entry: './src/main.js',
@@ -33,6 +34,16 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html'
-        })   
-    ]
+        }),
+        
+        new NodePolyfillPlugin()
+    ],
+    resolve: {
+  
+        fallback: {
+         
+          async_hooks: false,
+          "fs": false
+        },
+    } 
 }

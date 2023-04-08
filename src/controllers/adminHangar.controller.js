@@ -1,8 +1,8 @@
 import views from "../views/admin-Hangar.html";
 import { Hangar } from "../classes/hangar";
 import ListHangares from "../classes/listHangares";
-import { msj } from "../../utilities/messages";
-import { validations } from "../../utilities/validation";
+import { msj } from "../utilities/messages";
+import { validations } from "../utilities/validation";
 
 const AdminHangar = {
     loadView() {

@@ -1,4 +1,4 @@
-import ListUsers from "../src/classes/listUsers"
+
 
 const validations = {
     fieldEmpty(fields) {
