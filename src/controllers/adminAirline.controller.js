@@ -14,7 +14,6 @@ const AdminAirline = {
     },
 
     manageDom() {
-        console.log(sessionStorage.getItem('session'));
         let listUsers = new ListUsers();
         listUsers._listUsers = listUsers.getListUsers();
         let list = listUsers.getListByType('airline');

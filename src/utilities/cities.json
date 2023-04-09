@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "San Andrés De Tumaco"
+    },
+    {
+        "id": 2,
+        "name": "Bogotá"
+    },
+    {
+        "id": 3,
+        "name": "Medellín"
+    },
+    {
+        "id": 4,
+        "name": "Cartagena"
+    },
+    {
+        "id": 5,
+        "name": "Cali"
+    },
+    {
+        "id": 6,
+        "name": "Santa Marta"
+    },
+    {
+        "id": 7,
+        "name": "Barranquilla"
+    }
+]

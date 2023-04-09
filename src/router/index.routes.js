@@ -48,8 +48,52 @@ const router = (route) => {
             return console.log('admin-Hangares');
         }
 
-        case '#/airline': {
+        case '#/airline-pilot': {
+            let string = sessionStorage.getItem('session');
+            let session = JSON.parse(string);
 
+            if (session.typeUser === "airline") { 
+                content.append(pages.airlinePilot.loadView());
+                pages.airlinePilot.manageDom();
+            }
+            else {
+                window.location.hash = '#/login';
+                sessionStorage.removeItem('session')
+            }
+
+            return console.log('aerolinea-Pilotos');
+        }
+
+        case '#/airline-plane': {
+            let string = sessionStorage.getItem('session');
+            let session = JSON.parse(string);
+
+            if (session.typeUser === "airline") { 
+                content.append(pages.airlinePlane.loadView());
+                pages.airlinePlane.manageDom();
+            }
+            else {
+                window.location.hash = '#/login';
+                sessionStorage.removeItem('session')
+            }
+
+            return console.log('aerolinea-Aviones');
+        }
+
+        case '#/airline-flight': {
+            let string = sessionStorage.getItem('session');
+            let session = JSON.parse(string);
+
+            if (session.typeUser === "airline") { 
+                content.append(pages.airlineFlight.loadView());
+                pages.airlineFlight.manageDom();
+            }
+            else {
+                window.location.hash = '#/login';
+                sessionStorage.removeItem('session')
+            }
+
+            return console.log('aerolinea-Vuelos');
         }
 
         default: {

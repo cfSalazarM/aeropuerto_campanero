@@ -3,6 +3,7 @@ import { User } from "../classes/user";
 import ListUsers from "../classes/listUsers";
 import { msj } from "../utilities/messages";
 import { validations } from "../utilities/validation";
+import { forIn } from "lodash";
 
 const Login = {
     loadView() {
@@ -25,7 +26,6 @@ const Login = {
             if (!pass) {
                 msj.fieldsOk(pass);
             }
-
             else {
                 let listUsers = new ListUsers();
                 listUsers._listUsers = listUsers.getListUsers();
@@ -35,11 +35,30 @@ const Login = {
                     let i = listUsers.getUser(user);
                     let item = listUsers._listUsers.at(i);
                     sessionStorage.setItem("session", JSON.stringify(item));
+                    const hashs = {
+                       admin: "#/admin-airline" ,
+                       airline: "#/airline-pilot"
+                    }
+
+                    let hash;
+
+                    for (const key in hashs) {
+                        if (key === item.typeUser) {
+                            hash = hashs[key];
+                            console.log(hash);
+                            break;
+                            
+                        }
+                    }
+
+                    msj.Login0k(flag, hash);
+                   
                 }
-                msj.Login0k(flag, "#/admin-airline");
+                else {
+                    msj.Login0k(flag, "");
+                }
+                
             }
-
-
 
 
         });
