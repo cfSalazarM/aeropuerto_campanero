@@ -26,6 +26,12 @@ export default class ListPlanes {
         return result
     }
 
+    getPlane(id) {
+        let result = this._listPlane.find((plane) => plane.id === id);
+
+        return result
+    }
+
     editPlane(id, model, capacity) {
         let indice = this.getPlaneById(id);
         this._listPlane.at(indice).id = id;

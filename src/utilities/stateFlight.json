@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "description": "En revisión"
+    },
+
+    {
+        "id": 2,
+        "description": "Aprobado"
+    },
+
+    {
+        "id": 3,
+        "description": "No aprobado"
+    }
+]

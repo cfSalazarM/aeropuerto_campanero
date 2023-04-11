@@ -31,6 +31,12 @@ export default class ListUsers {
         return result
     }
 
+    getUserById(user) {
+        let result = this._listUsers.find((item) => item.user === user);
+
+        return result
+    }
+
     authUser(user, password) {
         let list = this._listUsers.filter(item => item.user === user && item.password === password );
 

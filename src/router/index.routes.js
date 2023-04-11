@@ -39,6 +39,22 @@ const router = (route) => {
             }
             
             return console.log('admin-Aerolineas');
+        }
+
+        case '#/admin-flight': {
+            let string = sessionStorage.getItem('session');
+            let session = JSON.parse(string);
+
+            if (session.typeUser === "admin") { 
+                content.appendChild(pages.adminFlight.loadView());
+                pages.adminFlight.manageDom();
+            }
+            else {
+                window.location.hash = '#/login';
+                sessionStorage.removeItem('session')
+            }
+            
+            return console.log('admin-Vuelos');
         };
 
         case '#/admin-hangar': {
