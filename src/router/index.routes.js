@@ -115,7 +115,9 @@ const router = (route) => {
         default: {
             if (window.location.href == 'http://localhost:8080/') {
                 content.innerHTML = '';
-                content.appendChild(pages.home());
+                content.appendChild(pages.home.loadView());
+                pages.home.manageDom();
+                return console.log('Home');
             };
             return console.log('404!!!');
         }

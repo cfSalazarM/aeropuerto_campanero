@@ -29,6 +29,32 @@ const msj = {
         }
     },
 
+    showMsjToast() {
+        if (sessionStorage.getItem("msj")) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              
+              Toast.fire({
+                icon: 'success',
+                title: `${sessionStorage.getItem("msj")}`
+              })
+
+            sessionStorage.removeItem("hmsj");
+            sessionStorage.removeItem("msj");
+            sessionStorage.removeItem("typeMsj");
+        }
+        
+    },
+
     fieldsOk(flag) {
         if (!flag) {
             sessionStorage.setItem("hmsj", "Error");
@@ -96,6 +122,13 @@ const msj = {
     DeleteAllOk() {
         sessionStorage.setItem("hmsj", "Aviso");
         sessionStorage.setItem("msj", "Todos los registros se han eliminado correctamente");
+        sessionStorage.setItem("typeMsj", "success");
+        window.location.reload();
+    },
+
+    FlightScheduled() {
+        sessionStorage.setItem("hmsj", "Aviso");
+        sessionStorage.setItem("msj", "Vuelo agendado con exito");
         sessionStorage.setItem("typeMsj", "success");
         window.location.reload();
     }

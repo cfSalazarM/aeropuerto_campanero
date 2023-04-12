@@ -6,11 +6,11 @@
 
     {
         "id": 2,
-        "description": "Aprobado"
+        "description": "Agendado"
     },
 
     {
         "id": 3,
-        "description": "No aprobado"
+        "description": "Solicitud rechazada"
     }
 ]

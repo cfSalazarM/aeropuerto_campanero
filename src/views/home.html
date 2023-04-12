@@ -35,71 +35,34 @@
 <div class="d-flex justify-content-center">
     <form class="row g-3 flight-form shadow-lg p-3 mb-5 bg-body rounded">
       <div class="col-auto">
-        <label class="visually" for="specificSizeSelect">¿A dónde viajas?</label>
-        <select class="form-select" id="specificSizeSelect">
-          <option selected>Desde...</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <label class="visually" for="s-city">Desde donde viajas?</label>
+        <select class="form-select" id="s-city">
+  
         </select>
       </div>
       <div class="col-auto">
-        <label class="invisible">Destino</label>
-        <select class="form-select" id="specificSizeSelect">
-          <option selected>Hacia...</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <label class="" for="s-cityDestiny">Hacia</label>
+        <select class="form-select" id="s-cityDestiny">
         </select>
       </div>
       <div class="col-auto">
         <label class="visually" for="specificSizeSelect">¿Cuándo viajas?</label>
-        <select class="form-select" id="specificSizeSelect">
-          <option selected>Salida</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+        <input type="date" class="form-control">
       </div>
       <div class="col-auto">
-        <label class="invisible">Destino</label>
-        <select class="form-select" id="specificSizeSelect">
-          <option selected>Vuelta</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+        <label class="visually" for="adults-input">Pasajeros</label>
+        <input type="number" class="form-control" name="" placeholder="Adultos" id="adults-input" min="1" required>
       </div>
       <div class="col-auto">
-        <label class="visually" for="specificSizeSelect">Pasajeros</label>
-        <select class="form-select" id="specificSizeSelect">
-          <option selected>Adultos</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+        <label class="invisible" for="children-input">Niños</label>
+        <input type="number" class="form-control" name="" placeholder="Niños" id="children-input" min="0" required>
       </div>
       <div class="col-auto">
-        <label class="invisible" for="specificSizeSelect">Niños</label>
-        <select class="form-select" id="specificSizeSelect">
-          <option selected>Niños</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      <div class="col-auto">
-        <label class="invisible" for="specificSizeSelect">Bebés</label>
-        <select class="form-select" id="specificSizeSelect">
-          <option selected>Bebés</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+        <label class="invisible" for="infants-input">Bebés</label>
+          <input type="number" class="form-control" name="" placeholder="Bebés" id="infants-input" min="0">
       </div>
       <div class="col-auto align-self-center pt-4">
         <button type="submit" class="btn btn-primary mb-3">Buscar vuelos</button>
-        <i class="fa-solid fa-tickets-airline"></i>
       </div>
       
     </form>

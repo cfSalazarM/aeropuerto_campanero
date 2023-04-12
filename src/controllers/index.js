@@ -1,7 +1,7 @@
-import {Login} from './login.controller';
-import Home from './home.controller';
-import {AdminAirline} from './adminAirline.controller';
-import {Register} from './register.controller';
+import { Login } from './login.controller';
+import { Home } from './home.controller';
+import { AdminAirline } from './adminAirline.controller';
+import { Register } from './register.controller';
 import { AdminHangar } from './adminHangar.controller';
 import { AirlinePilot } from './airlinePilot.controller';
 import { AirlinePlane } from './airlinePlane.controller';

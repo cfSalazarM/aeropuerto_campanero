@@ -26,13 +26,25 @@ export default class ListFlights {
         return result
     }
 
+    getFlight(code) {
+        let result = this._listFlight.find((item) => item.code === code);
+
+        return result
+    }
+
     editFlight(code, capacity, location) {
         let indice = this.getFlightByCode(code);
         this._listFlight.at(indice).code = code;
         this._listFlight.at(indice).capacity = capacity;
         this._listFlight.at(indice).location = location;
-        this.localStorageHList(this._listFlight);
+        this.localStorageFList(this._listFlight);
        
+    }
+
+    updateState(codeFlight, newState) {
+        let indice = this.getFlightByCode(codeFlight);
+        this._listFlight.at(indice).state = newState;
+        this.localStorageFList(this._listFlight);
     }
 
     deleteFlight(code) {

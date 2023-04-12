@@ -52,7 +52,7 @@ const AirlineFlight = {
             let nodoTextCD = document.createTextNode(list[index].cityDestiny);
             let nodoTextDate = document.createTextNode(list[index].date);
             let nodoTextTime = document.createTextNode(list[index].time);
-            let nodoTextState = document.createTextNode(list[index].state);
+            let nodoTextState = document.createTextNode(list[index].state.description);
 
 
             celdaId.appendChild(nodoTextId);
@@ -74,9 +74,12 @@ const AirlineFlight = {
             fila.appendChild(celdaTime);
             fila.appendChild(celdaState);
 
-            celdaEditDelete.innerHTML = '<a href="#editFlightModal" class="edit" data-bs-toggle="modal" data-bs-id="' + list[index].code + '" id="aEditPilot"><i class="fa-solid fa-pencil" data-toggle="tooltip" title="Editar" style="font-size: 22px; margin: 0 5px;"></i></a>';
+            if (list[index].state.id != 2) {
+                celdaEditDelete.innerHTML = '<a href="#editFlightModal" class="edit" data-bs-toggle="modal" data-bs-id="' + list[index].code + '" id="aEditPilot"><i class="fa-solid fa-pencil" data-toggle="tooltip" title="Editar" style="font-size: 22px; margin: 0 5px;"></i></a>';
                 
-            fila.appendChild(celdaEditDelete);
+                fila.appendChild(celdaEditDelete);
+            }
+            
 
             tbody.appendChild(fila);
         }
@@ -124,7 +127,6 @@ const AirlineFlight = {
 
             let indice = selectCO.selectedIndex;
             let opcionSeleccionada = selectCO.options[indice].value;
-            console.log(opcionSeleccionada);
 
             cities.forEach(city => {
                 const option = document.createElement('option');
@@ -133,7 +135,6 @@ const AirlineFlight = {
                     option.text = city.name;
                     selectCD.appendChild(option);
                 }
-                
             });
 
             selectCO.addEventListener('change', () => {
@@ -179,7 +180,7 @@ const AirlineFlight = {
 
             const airline = sessionStorage.getItem('session');
 
-            const flight = new Flight(code, plane, pilot, cityOrigin, cityDestiny, date, time, stateFlight.at(0).description, JSON.parse(airline));
+            const flight = new Flight(code, plane, pilot, cityOrigin, cityDestiny, date, time, stateFlight.at(0), JSON.parse(airline));
 
             listFlights.addFlight(flight);
 
