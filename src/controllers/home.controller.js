@@ -46,9 +46,39 @@ const Home = {
                     option.text = city.name;
                     selectCD.appendChild(option);
                 }
-                
             });
         });
+
+        const form = document.getElementById('form');
+
+        form.addEventListener('submit', evt => {
+            evt.preventDefault();
+
+            const indiceCO = selectCO.selectedIndex;
+            const cityOrigin = selectCO.options[indiceCO].value;
+
+            const indiceCD = selectCD.selectedIndex;
+            const cityDestiny = selectCD.options[indiceCD].value;
+
+            const date = document.getElementById('date').value;
+
+            const adults = document.getElementById('adults-input').value;
+            const children = document.getElementById('children-input').value;
+            const infants = document.getElementById('infants-input').value;
+
+            const search = {
+                cityOrigin: cityOrigin,
+                cityDestiny: cityDestiny,
+                date: date,
+                adults: adults,
+                children: children,
+                infants: infants
+            }
+
+            sessionStorage.setItem('search-flight', JSON.stringify(search));
+            window.location.hash = '#/avb-flight';
+
+        })
 
         function cleanSelect(select) {
 

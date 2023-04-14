@@ -7,6 +7,7 @@ import { AirlinePilot } from './airlinePilot.controller';
 import { AirlinePlane } from './airlinePlane.controller';
 import { AirlineFlight } from './airlineFlight.controller';
 import { AdminFlight } from './adminFlight.controller';
+import { AvailabilityFlight } from './availabilityFlight.controller';
 
 const pages = {
     login: Login,
@@ -17,7 +18,8 @@ const pages = {
     airlinePilot: AirlinePilot,
     airlinePlane: AirlinePlane,
     airlineFlight: AirlineFlight,
-    adminFlight: AdminFlight
+    adminFlight: AdminFlight,
+    availabilityFlight: AvailabilityFlight
 };
 
 export {pages};

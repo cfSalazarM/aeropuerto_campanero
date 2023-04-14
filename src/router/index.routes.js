@@ -112,6 +112,18 @@ const router = (route) => {
             return console.log('aerolinea-Vuelos');
         }
 
+        case '#/avb-flight': {
+            let string = sessionStorage.getItem('search-flight');
+            let session = JSON.parse(string);
+
+            if (session) { 
+                content.append(pages.availabilityFlight.loadView());
+                
+            }
+
+            return console.log('aerolinea-Vuelos');
+        }
+
         default: {
             if (window.location.href == 'http://localhost:8080/') {
                 content.innerHTML = '';
