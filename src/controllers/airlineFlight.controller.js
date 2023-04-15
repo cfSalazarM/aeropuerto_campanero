@@ -2,7 +2,6 @@ import views from "../views/airline-flight.html";
 import { msj } from "../utilities/messages";
 import { validations } from "../utilities/validation";
 import ListUsers from "../classes/listUsers";
-import { User } from "../classes/user";
 import ListPlanes from "../classes/listAviones";
 import cities from "../utilities/cities.json";
 import ListFlights from "../classes/listFlight";
@@ -20,7 +19,7 @@ const AirlineFlight = {
 
     manageDom() {
         let listFlights = new ListFlights();
-        listFlights._listFlight  = listFlights.getListFlight();
+        listFlights._listFlight = listFlights.getListFlight();
 
         let listUsers = new ListUsers();
         listUsers._listUsers = listUsers.getListUsers();
@@ -76,10 +75,9 @@ const AirlineFlight = {
 
             if (list[index].state.id != 2) {
                 celdaEditDelete.innerHTML = '<a href="#editFlightModal" class="edit" data-bs-toggle="modal" data-bs-id="' + list[index].code + '" id="aEditPilot"><i class="fa-solid fa-pencil" data-toggle="tooltip" title="Editar" style="font-size: 22px; margin: 0 5px;"></i></a>';
-                
+
                 fila.appendChild(celdaEditDelete);
             }
-            
 
             tbody.appendChild(fila);
         }
@@ -99,7 +97,7 @@ const AirlineFlight = {
             cleanSelect(selectPlane);
             cleanSelect(selectCO);
             cleanSelect(selectCD);
-            
+
             let listPilot = listUsers.getListByType('pilot');
             let listPlane = new ListPlanes();
             listPlane._listPlane = listPlane.getListPlane();
@@ -150,7 +148,7 @@ const AirlineFlight = {
                         option.text = city.name;
                         selectCD.appendChild(option);
                     }
-                    
+
                 });
             })
 
@@ -180,11 +178,22 @@ const AirlineFlight = {
 
             const airline = sessionStorage.getItem('session');
 
-            const flight = new Flight(code, plane, pilot, cityOrigin, cityDestiny, date, time, stateFlight.at(0), JSON.parse(airline));
+            let fields = [code, date, time];
+            let pass = validations.fieldEmpty(fields);
+            let passNumber = validations.isNumber(fields, ['Código de vuelo', 'Fecha', 'Hora']);
 
-            listFlights.addFlight(flight);
+            if (!pass) {
+                msj.fieldsOk(pass);
+            }
+            else if (!passNumber) {
+                msj.numberOk(passNumber);
+            }
+            else {
+                const flight = new Flight(code, plane, pilot, cityOrigin, cityDestiny, date, time, stateFlight.at(0), JSON.parse(airline));
+                listFlights.addFlight(flight);
+                msj.RegisterOk();
+            }
 
-            msj.RegisterOk();
         });
 
         function cleanSelect(select) {

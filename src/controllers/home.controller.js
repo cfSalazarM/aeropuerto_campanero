@@ -1,5 +1,7 @@
 import views from "../views/home.html";
 import cities from "../utilities/cities.json";
+import { validations } from "../utilities/validation";
+import { msj } from "../utilities/messages";
 
 const Home = {
     loadView() {
@@ -10,6 +12,8 @@ const Home = {
     },
 
     manageDom() {
+
+        msj.showMsj();
 
         let selectCO = document.getElementById('s-city');
         let selectCD = document.getElementById('s-cityDestiny');
@@ -66,17 +70,30 @@ const Home = {
             const children = document.getElementById('children-input').value;
             const infants = document.getElementById('infants-input').value;
 
-            const search = {
-                cityOrigin: cityOrigin,
-                cityDestiny: cityDestiny,
-                date: date,
-                adults: adults,
-                children: children,
-                infants: infants
-            }
+            let fields = [date, adults, children, infants];
 
-            sessionStorage.setItem('search-flight', JSON.stringify(search));
-            window.location.hash = '#/avb-flight';
+            let pass = validations.fieldEmpty(fields);
+            let pass2 = validations.numberFields(fields);
+            
+            if (!pass) {
+                msj.fieldsOk();
+            }
+            else if (!pass2) {
+                msj.numberFields(pass2);
+            }
+            else {
+                const search = {
+                    cityOrigin: cityOrigin,
+                    cityDestiny: cityDestiny,
+                    date: date,
+                    adults: adults,
+                    children: children,
+                    infants: infants
+                }
+
+                sessionStorage.setItem('search-flight', JSON.stringify(search));
+                window.location.hash = '#/avb-flight';
+            }
 
         })
 

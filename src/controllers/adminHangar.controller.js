@@ -92,10 +92,14 @@ const AdminHangar = {
             let location = document.getElementById('inputLocationEdit').value
 
             let fields = [code, capacity, location];
+            let passNumber = validations.isNumber(fields, ['codigo', 'capacidad', 'ubicación']);
 
             let pass = validations.fieldEmpty(fields);
             if (!pass) {
                 msj.fieldsOk(pass);
+            }
+            else if(!passNumber.flag) {
+                msj.numberOk(passNumber);
             }
             else {
                 listHangares.editHangar(code, capacity, location);

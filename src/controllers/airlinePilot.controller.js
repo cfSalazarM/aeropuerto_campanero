@@ -98,10 +98,14 @@ const AirlinePilot = {
             let password = document.getElementById('inputPasswordEdit').value;
 
             let fields = [id, name, phone, password];
+            let passNumber = validations.isNumber([id, phone], ['Identificación', 'Telefono']);
 
             let pass = validations.fieldEmpty(fields);
             if (!pass) {
                 msj.fieldsOk(pass);
+            }
+            else if (!passNumber.flag) {
+                msj.numberOk(passNumber);
             }
             else {
                 listUsers.editUser(id, name, phone, password);

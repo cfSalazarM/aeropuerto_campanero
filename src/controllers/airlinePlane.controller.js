@@ -92,10 +92,14 @@ const AirlinePlane = {
             let capacity = document.getElementById('inputCapacityEdit').value;
 
             let fields = [id, model, capacity];
+            let passNumber = validations.isNumber([capacity], ['Capacidad']);
 
             let pass = validations.fieldEmpty(fields);
             if (!pass) {
                 msj.fieldsOk(pass);
+            }
+            else if(!passNumber.flag) {
+                msj.numberOk(passNumber);
             }
             else {
                 listPlanes.editPlane(id, model, capacity);

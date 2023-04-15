@@ -63,6 +63,7 @@ const AdminAirline = {
             let fields = [nit, nombre, telefono, password];
             let pass = validations.fieldEmpty(fields);
             let passNumber = validations.isNumber([nit, telefono], ['Nit', 'Telefono']);
+            
             if (!pass) {
                 msj.fieldsOk(pass);
             }
@@ -97,6 +98,7 @@ const AdminAirline = {
             let name = document.getElementById('inputNombreEdit').value;
             let phone = document.getElementById('inputTelefonoEdit').value
             let password = document.getElementById('inputPasswordEdit').value;
+            let passNumber = validations.isNumber([nit, phone], ['Nit', 'Telefono']);
 
             let fields = [nit, name, phone, password];
 
@@ -104,6 +106,10 @@ const AdminAirline = {
             if (!pass) {
                 msj.fieldsOk(pass);
             }
+            else if (!passNumber.flag) {
+                msj.numberOk(passNumber);
+            }
+
             else {
                 listUsers.editUser(nit, name, phone, password);
 

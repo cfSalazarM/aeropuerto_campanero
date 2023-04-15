@@ -40,18 +40,16 @@ const AvailabilityFlight = {
                                             <p>${result.cityDestiny}</p>
                                         </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
-                        
                     </div>`    
                             
             }
             else {
                 divElement.innerHTML =
                 `<div class="m-5 shadow p-3 mb-5 bg-body-tertiary rounded">
-                    <h5>Lo sentimos no se econtraron resultados para tu busqueda</h5>
+                    <h5>Lo sentimos, no se econtraron resultados para tu busqueda</h5>
                 </div>`
             }
             console.log(result);

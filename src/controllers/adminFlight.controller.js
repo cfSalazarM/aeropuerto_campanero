@@ -1,6 +1,5 @@
 import views from "../views/admin-flight.html";
 import { msj } from "../utilities/messages";
-import { validations } from "../utilities/validation";
 import ListFlights from "../classes/listFlight";
 import stateFlight from "../utilities/stateFlight.json"
 
