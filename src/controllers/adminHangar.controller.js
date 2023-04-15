@@ -4,6 +4,7 @@ import ListHangares from "../classes/listHangares";
 import { msj } from "../utilities/messages";
 import { validations } from "../utilities/validation";
 import closeSession from "../utilities/closeSession";
+import sidebar from "../utilities/sidebar";
 
 const AdminHangar = {
     loadView() {
@@ -15,6 +16,7 @@ const AdminHangar = {
     },
 
     manageDom() {
+        sidebar.openCloseNav();
         let listHangares = new ListHangares();
         listHangares._listHangar = listHangares.getListHangar();
         let list = listHangares._listHangar;

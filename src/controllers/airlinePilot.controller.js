@@ -4,6 +4,7 @@ import ListUsers from "../classes/listUsers";
 import { User } from "../classes/user";
 import { validations } from "../utilities/validation";
 import closeSession from "../utilities/closeSession";
+import sidebar from "../utilities/sidebar";
 
 const AirlinePilot = {
     loadView() {
@@ -15,6 +16,7 @@ const AirlinePilot = {
     },
 
     manageDom() {
+        sidebar.openCloseNav();
         let listUsers = new ListUsers();
         listUsers._listUsers = listUsers.getListUsers();
         let list = listUsers.getListByType('pilot');

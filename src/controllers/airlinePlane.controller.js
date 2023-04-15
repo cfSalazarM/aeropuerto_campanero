@@ -4,6 +4,7 @@ import { validations } from "../utilities/validation";
 import {Plane} from "../classes/avion";
 import ListPlanes from "../classes/listAviones";
 import closeSession from "../utilities/closeSession";
+import sidebar from "../utilities/sidebar";
 
 const AirlinePlane = {
     loadView() {
@@ -15,6 +16,7 @@ const AirlinePlane = {
     },
 
     manageDom() {
+        sidebar.openCloseNav();
         let listPlanes = new ListPlanes();
         listPlanes._listPlane = listPlanes.getListPlane();
         let list = listPlanes._listPlane;

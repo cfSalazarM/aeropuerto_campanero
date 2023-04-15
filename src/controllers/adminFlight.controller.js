@@ -3,6 +3,7 @@ import { msj } from "../utilities/messages";
 import ListFlights from "../classes/listFlight";
 import stateFlight from "../utilities/stateFlight.json"
 import closeSession from "../utilities/closeSession";
+import sidebar from "../utilities/sidebar";
 
 const AdminFlight = {
     loadView() {
@@ -13,6 +14,7 @@ const AdminFlight = {
     },
 
     manageDom() {
+        sidebar.openCloseNav();
         let listFlights = new ListFlights();
         listFlights._listFlight = listFlights.getListFlight();
 

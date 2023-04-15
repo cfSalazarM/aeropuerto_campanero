@@ -223,9 +223,13 @@ table.table td i {
         position: fixed;
         min-height: 100vh;
         z-index: 1;
+		transition: all 0.25s;
+    	-webkit-transition: all 0.25s;
     }
 
     #side-nav.active {
         margin-left: 0;
+		transition: all 0.25s;
+    	-webkit-transition: all 0.25s;
     }
 }

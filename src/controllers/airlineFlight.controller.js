@@ -8,6 +8,7 @@ import ListFlights from "../classes/listFlight";
 import { Flight } from "../classes/flight";
 import stateFlight from "../utilities/stateFlight.json"
 import closeSession from "../utilities/closeSession";
+import sidebar from "../utilities/sidebar";
 
 const AirlineFlight = {
     loadView() {
@@ -19,6 +20,7 @@ const AirlineFlight = {
     },
 
     manageDom() {
+        sidebar.openCloseNav();
         let listFlights = new ListFlights();
         listFlights._listFlight = listFlights.getListFlight();
 
