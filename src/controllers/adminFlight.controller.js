@@ -2,6 +2,7 @@ import views from "../views/admin-flight.html";
 import { msj } from "../utilities/messages";
 import ListFlights from "../classes/listFlight";
 import stateFlight from "../utilities/stateFlight.json"
+import closeSession from "../utilities/closeSession";
 
 const AdminFlight = {
     loadView() {
@@ -104,7 +105,13 @@ const AdminFlight = {
             listFlights.updateState(code, stateFlight.at(2));
 
             msj.FlightScheduled();
-        })
+        });
+
+        const btnCloseSession = document.getElementById('close-session');
+        btnCloseSession.addEventListener('submit', evt=> {
+            evt.preventDefault();
+            closeSession();
+        });
 
         function getCode(event) {
             let selection = event.relatedTarget;

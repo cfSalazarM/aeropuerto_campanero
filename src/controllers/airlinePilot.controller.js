@@ -3,6 +3,7 @@ import { msj } from "../utilities/messages";
 import ListUsers from "../classes/listUsers";
 import { User } from "../classes/user";
 import { validations } from "../utilities/validation";
+import closeSession from "../utilities/closeSession";
 
 const AirlinePilot = {
     loadView() {
@@ -131,7 +132,13 @@ const AirlinePilot = {
             listUsers.deleteAllUsers("pilot");
 
             msj.DeleteAllOk();
-        })
+        });
+
+        const butCloseSession = document.getElementById('close-session');
+        butCloseSession.addEventListener('submit', evt => {
+            evt.preventDefault();
+            closeSession();
+        });
 
         function getId(event) {
             let selection = event.relatedTarget;

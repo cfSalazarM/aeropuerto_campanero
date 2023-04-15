@@ -3,6 +3,7 @@ import { Hangar } from "../classes/hangar";
 import ListHangares from "../classes/listHangares";
 import { msj } from "../utilities/messages";
 import { validations } from "../utilities/validation";
+import closeSession from "../utilities/closeSession";
 
 const AdminHangar = {
     loadView() {
@@ -124,7 +125,13 @@ const AdminHangar = {
             listHangares.deleteAllHangares();
 
             msj.DeleteAllOk();
-        })
+        });
+
+        const btnCloseSession = document.getElementById('close-session');
+        btnCloseSession.addEventListener('submit', evt => { 
+            evt.preventDefault();
+            closeSession();
+        });
 
         function getCode(event) {
             let selection = event.relatedTarget;

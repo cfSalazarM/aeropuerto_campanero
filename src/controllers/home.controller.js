@@ -95,7 +95,7 @@ const Home = {
                 window.location.hash = '#/avb-flight';
             }
 
-        })
+        });
 
         function cleanSelect(select) {
 

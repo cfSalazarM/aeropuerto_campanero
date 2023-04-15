@@ -7,6 +7,7 @@ import cities from "../utilities/cities.json";
 import ListFlights from "../classes/listFlight";
 import { Flight } from "../classes/flight";
 import stateFlight from "../utilities/stateFlight.json"
+import closeSession from "../utilities/closeSession";
 
 const AirlineFlight = {
     loadView() {
@@ -194,6 +195,12 @@ const AirlineFlight = {
                 msj.RegisterOk();
             }
 
+        });
+
+        const btnCloseSession = document.getElementById('close-session');
+        btnCloseSession.addEventListener('submit', evt => {
+            evt.preventDefault();
+            closeSession();
         });
 
         function cleanSelect(select) {
