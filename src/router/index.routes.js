@@ -198,8 +198,6 @@ const router = (route) => {
             return console.log('404!!!');
         }
     }
-
-
 }
 
 export { router };
