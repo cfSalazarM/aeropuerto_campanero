@@ -56,8 +56,8 @@ export default class ListFlights {
         localStorage.removeItem('localFList');
     }
 
-    scheduleflight() {
-        
+    checkCode(code) {
+        return this._listFlight.some(flight => flight.code === code);
     }
 
     localStorageFList(listFlights) {

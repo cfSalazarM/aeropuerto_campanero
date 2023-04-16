@@ -66,6 +66,9 @@ const AirlinePlane = {
             else if(!passNumber.flag) {
                 msj.numberOk(passNumber);
             }
+            else if (listPlanes.checkId(id)) {
+                msj.idExist();
+            }
             else {
                 let plane = new Plane(id, model, capacity);
                 listPlanes.addPlane(plane);

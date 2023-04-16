@@ -43,6 +43,16 @@ export default class ListUsers {
         return list.length > 0 && list.length < 2
     }
 
+    checkUser(user, typeUser, nameUser) {
+        if (typeUser === "airline") {
+            return this._listUsers.some(item => item.user === user || item.nameUser.toUpperCase() == nameUser.toUpperCase());
+        }
+        else {
+            return this._listUsers.some(item => item.user === user);
+        }
+    }
+
+
     issetAdmin() {
         let result = this._listUsers.filter(user => user.typeUser === "admin");
 

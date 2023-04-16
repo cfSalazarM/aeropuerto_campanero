@@ -24,6 +24,17 @@ const validations = {
         }
 
         return {flag: ban, nameField: nameField};
+    },
+
+    validateDate(date) {
+        let ban = true;
+        let currentDate = new Date();
+        let dateFlight = new Date(date);
+        if (currentDate > dateFlight) {
+            ban = false;
+        }
+
+        return ban;
     }
 } 
 

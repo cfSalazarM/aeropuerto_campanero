@@ -66,6 +66,9 @@ const AdminHangar = {
             else if(!passNumber.flag) {
                 msj.numberOk(passNumber);
             }
+            else if (listHangares.checkHangar(code)) {
+                msj.codeExist('hangar');
+            }
             else {
                 let hangar = new Hangar(code, capacity, location);
                 listHangares.addHangar(hangar);

@@ -73,6 +73,9 @@ const AdminAirline = {
             else if (!passNumber.flag) {
                 msj.numberOk(passNumber);
             }
+            else if (listUsers.checkUser(nit, "airline", nombre)) {
+                msj.userExist();
+            }
             else {
                 let aerolinea = new User(nit, nombre, telefono, "airline", password);
                 listUsers.addUser(aerolinea);
@@ -112,7 +115,9 @@ const AdminAirline = {
             else if (!passNumber.flag) {
                 msj.numberOk(passNumber);
             }
-
+            else if (listUsers.checkUser(nit, "airline", name)) {
+                msj.userExist();
+            }
             else {
                 listUsers.editUser(nit, name, phone, password);
 

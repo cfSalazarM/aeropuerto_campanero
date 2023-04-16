@@ -73,6 +73,34 @@ const msj = {
         }
     },
 
+    userExist() {
+        sessionStorage.setItem("hmsj", "Error");
+        sessionStorage.setItem("msj", "El usuario ingresado ya existe");
+        sessionStorage.setItem("typeMsj", "error");
+        window.location.reload();
+    },
+
+    idExist() {
+        sessionStorage.setItem("hmsj", "Error");
+        sessionStorage.setItem("msj", "Ya existe un avion con esta matricula");
+        sessionStorage.setItem("typeMsj", "error");
+        window.location.reload();
+    },
+    
+    codeExist(clase) {
+        sessionStorage.setItem("hmsj", "Error");
+        sessionStorage.setItem("msj", "Ya existe un " + clase + " con este codigo");
+        sessionStorage.setItem("typeMsj", "error");
+        window.location.reload();
+    },
+
+    dateInvalid() {
+        sessionStorage.setItem("hmsj", "Error");
+        sessionStorage.setItem("msj", "La fecha de vuelo no puede ser menor a la fecha actual");
+        sessionStorage.setItem("typeMsj", "error"); 
+        window.location.reload();
+    },
+
     Login0k(flag, hash) {
         if (flag === false) {
             sessionStorage.setItem("hmsj", "Error");

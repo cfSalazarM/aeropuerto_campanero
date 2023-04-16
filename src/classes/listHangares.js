@@ -26,6 +26,10 @@ export default class ListHangares {
         return result
     }
 
+    checkHangar(code) {
+        return this._listHangar.some(hangar => hangar.code === code);
+    }
+
     editHangar(code, capacity, location) {
         let indice = this.getHangarByCode(code);
         this._listHangar.at(indice).code = code;

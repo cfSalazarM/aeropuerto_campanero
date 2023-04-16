@@ -45,7 +45,6 @@ const AirlineFlight = {
             let celdadDate = document.createElement('td');
             let celdaTime = document.createElement('td');
             let celdaState = document.createElement('td');
-            let celdaEditDelete = document.createElement('td');
 
             let nodoTextId = document.createTextNode(list[index].code);
             let nodoTextPlane = document.createTextNode(list[index].plane.id);
@@ -76,16 +75,8 @@ const AirlineFlight = {
             fila.appendChild(celdaTime);
             fila.appendChild(celdaState);
 
-            if (list[index].state.id != 2) {
-                celdaEditDelete.innerHTML = '<a href="#editFlightModal" class="edit" data-bs-toggle="modal" data-bs-id="' + list[index].code + '" id="aEditPilot"><i class="fa-solid fa-pencil" data-toggle="tooltip" title="Editar" style="font-size: 22px; margin: 0 5px;"></i></a>';
-
-                fila.appendChild(celdaEditDelete);
-            }
-
             tbody.appendChild(fila);
         }
-
-
         msj.showMsj();
 
         const modalAdd = document.getElementById('addFlightModal');
@@ -184,12 +175,19 @@ const AirlineFlight = {
             let fields = [code, date, time];
             let pass = validations.fieldEmpty(fields);
             let passNumber = validations.isNumber(fields, ['Código de vuelo', 'Fecha', 'Hora']);
+            let passDate = validations.validateDate(date);
 
             if (!pass) {
                 msj.fieldsOk(pass);
             }
             else if (!passNumber) {
                 msj.numberOk(passNumber);
+            }
+            else if (listFlights.checkCode(code)) {
+                msj.codeExist('vuelo');
+            }
+            else if (!passDate) {
+                msj.dateInvalid();
             }
             else {
                 const flight = new Flight(code, plane, pilot, cityOrigin, cityDestiny, date, time, stateFlight.at(0), JSON.parse(airline));

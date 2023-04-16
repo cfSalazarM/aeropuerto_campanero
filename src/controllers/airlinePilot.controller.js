@@ -71,6 +71,9 @@ const AirlinePilot = {
             else if (!passNumber.flag) {
                 msj.numberOk(passNumber);
             }
+            else if (listUsers.checkUser(id)) {
+                msj.userExist();
+            }
             else {
                 let pilot = new User(id, nombre, telefono, "pilot", password);
                 listUsers.addUser(pilot);
