@@ -71,15 +71,16 @@ const Home = {
             const infants = document.getElementById('infants-input').value;
 
             let fields = [date, adults, children, infants];
+            let fieldInfo = [adults, children, infants];
 
             let pass = validations.fieldEmpty(fields);
-            let pass2 = validations.numberFields(fields);
+            let pass2 = validations.isNumber(fieldInfo, ['cantidad de adultos', 'cantidad de niños', 'cantidad de bebes']);
             
             if (!pass) {
                 msj.fieldsOk();
             }
             else if (!pass2) {
-                msj.numberFields(pass2);
+                msj.numberOk(pass2);
             }
             else {
                 const search = {
